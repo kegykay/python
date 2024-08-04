@@ -1,3 +1,4 @@
+# SOLICITA A PALAVRA QUE DEVE SER ADIVINHADA
 palavra = input("\nDigite uma palavra secreta: ").upper().strip()
 
 for x in range(100):
