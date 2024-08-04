@@ -1,3 +1,5 @@
+import desenhos as d
+
 # SOLICITA A PALAVRA QUE DEVE SER ADIVINHADA
 palavra = input("\nDigite uma palavra secreta: ").upper().strip()
 
@@ -17,17 +19,7 @@ print("   |")
 print("   |\n=======")
 
 while True:
-    adivinha = ""
-    for letra in palavra:
-        if (letra in acertos):
-            adivinha += letra
-        else:
-            adivinha += "\u0394"
-    print(f"ADIVINHE ({len(palavra)} LETRAS): ")
-    
-    for letra in adivinha:
-        print(f"{letra} ", end="")
-    print()
+    adivinha = d.imprimir_palavra_secreta(palavra, acertos)
 
     # CONDIÇÃO DE VITÓRIA
     if (adivinha == palavra):
@@ -49,30 +41,7 @@ while True:
             print("\nVocê errou!".upper())
             print("Não fique para baixo, reinicie o jogo e vamos de novo!! :)\n")
 
-    # DESENHANDO A FORCA
-    print("   |-----¬")
-    print("   |     :")
-    if (erros >= 1):
-        print("   |     O  ")
-    else:
-        print("   |")
-
-    linha2 = ""
-    if (erros == 2):
-        linha2 = ("     |  ")
-    elif (erros == 3):
-        linha2 = ("    /|  ")
-    elif (erros >= 4):
-        linha2 = ("    /|\ ")
-    print(f"   |{linha2}")
-
-    linha3 = ""
-    if (erros == 5):
-        linha3 += ("    /  ")
-    elif (erros >= 6):
-        linha3 += ("    / \ ")
-    print(f"   |{linha3}")
-    print("   |\n=======")
+    d.forca(erros)
 
     # CONDIÇÃO DE DERROTA
     if (erros == 6):
