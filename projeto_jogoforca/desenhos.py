@@ -1,10 +1,10 @@
 def imprimir_palavra_secreta(palavra, acertos):
     adivinha = ""
     for letra in palavra:
-        if (letra in acertos):
+        if (letra.upper() in acertos):
             adivinha += letra
         else:
-            adivinha += "\u0394"
+            adivinha += "_"
     print(f"ADIVINHE ({len(palavra)} LETRAS): ")
     
     for letra in adivinha:
