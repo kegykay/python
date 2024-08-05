@@ -1,4 +1,5 @@
 import main as m
+import banco_dados
 
 def mostrar_menu():
     print("-"*30)
@@ -11,17 +12,30 @@ def mostrar_menu():
 
 
 while True:
+    conn = banco_dados.conectar()
+    banco_dados.criar_tabela(conn)
     mostrar_menu()
     
     opcao = int(input("Escolha a opção que deseja (1/2/3): "))
 
     if (opcao == 1):
         print("\nA PALAVRA FOI SORTEADA!!")
-        print("COMEÇAR JOGO!!! :)\n")
+        print("COMEÇAR JOGO!!! :)")
         m.jogar()
-        input("Digite qualquer tecla para continuar...")
+        input("Digite qualquer tecla para continuar...\n")
     elif (opcao == 2):
-        print("Mostrar Score")
+        print("")
+        print(" "*9 + "SCORE:")
+        dados = banco_dados.listar_dados()
+        if not (dados):
+            print("Score vazio.")
+        else:
+            i = 1
+            for player in dados:
+                print(f"{i} -> {player[1]}, Pontuação: {player[2]}")
+                i += 1
+
+        input("Digite qualquer tecla para continuar...\n")
 
     elif (opcao == 3):
         print("\nSaindo do Jogo.")
@@ -30,3 +44,4 @@ while True:
         print("\nOpção inválida. Tente novamente.")
         continue
 
+banco_dados.desconectar(conn)

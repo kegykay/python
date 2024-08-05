@@ -1,5 +1,6 @@
 import desenhos as d
 from random import choice
+import banco_dados
 
 
 def jogar():
@@ -16,8 +17,10 @@ def jogar():
 
     digitadas = []
     acertos = []
+    leters = []
     erros = 0
 
+    nome = input("Nome do jogador: ")
 
     print("   |-----¬")
     print("   |     :")
@@ -38,7 +41,9 @@ def jogar():
         # TENTATIVAS
         tentativa = input("\nDigite uma letra: ").upper().strip()
         if (tentativa in digitadas):
-            print("\nVocê já tentou esta letra!\n")
+            leters.append(tentativa)
+            print("\nVocê já tentou esta letra!")
+            print(f"Letras já utilizadas: {leters}\n")
             continue
         else:
             digitadas.append(tentativa)
@@ -48,7 +53,7 @@ def jogar():
                 erros += 1
                 print("\nVocê errou!".upper())
 
-        d.forca(erros)
+        score = d.forca(erros)
 
         # CONDIÇÃO DE DERROTA
         if (erros == 6):
@@ -57,3 +62,6 @@ def jogar():
             print("MAAASS, não fique para baixo, reinicie o jogo e vamos de novo!! :)\n")
             break
 
+    banco_dados.inserir_dado(nome, score)
+
+    
